@@ -1,0 +1,9 @@
+[submodule "max"]
+	path = max
+	url = git@github.com:badi/max.git
+[submodule "dax"]
+	path = dax
+	url = git@github.com:badi/dax.git
+[submodule "rax"]
+	path = rax
+	url = git@github.com:badi/rax.git

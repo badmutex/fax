@@ -7,3 +7,6 @@
 [submodule "rax"]
 	path = rax
 	url = git@github.com:badi/rax.git
+[submodule "gmx"]
+	path = gmx
+	url = git://github.com/badi/gmx

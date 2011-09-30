@@ -1,0 +1,21 @@
+
+* M@X:
+  - Transfer further arguments to gmx 
+	Example
+
+	#+BEGIN_SRC python
+	import dax, max, rax, gmx
+
+	daxproj = dax.Project()
+	raxproj = rax.Project()
+
+	pdb = 'protein.pdb'
+	ndx = 'system.ndx'
+	mapper  = max.Mapper(gmx.g_rms, kwargs={'s':pdb, 'n':ndx}, )
+	mapper.process(daxproj.get_files('*.xtc'), raxproj)
+	
+	raxproj.write()
+	#+END_SRC
+
+* GMX
+  - Provide operators that can be called directly from M@X using the kwargs parameter to max.Mapper

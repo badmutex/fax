@@ -1,4 +1,38 @@
 
+* D@X:
+** DONE Support projects with files on different file systems
+   Depending on storage criteria, an entire project may not be hosted
+   on a single file systems accessible by nodes in a cluster. The
+   solution is to abstract over file locations. This is accomplished
+   by a Location base class that supports multiple protocols for
+   resolving a file to the local machine. In the case of a local file,
+   the resolution is trivial. However, if the file is on a different
+   machine, there may be different ways to do so.
+
+   One protocol currently supported is the use of Chirp. By running a
+   Chirp server on myhost.domain one could add the file to the current project like so
+
+   #+BEGIN_SRC python
+   ## contains paths to project data
+   mylisting = 'datalist.dat'
+   locations = dax.Location.from_file(mylisting)
+
+   idnum = 42
+   project = dax.Project('prefix', 'group', 'platform', idnum)
+   project.load_locations(dax.read_cannonical, locations)
+   #+END_SRC
+
+   Furthermore, Location objects implement the __enter__ and __exit__
+   methods allowing the use of with-statements to fetch the remote
+   file and automatically clean up:
+
+   #+BEGIN_SRC python
+   url = 'chirp://myhost.domain:port/path/to/RUNXXXX/CLONEYYYY/GENZZZZ'
+   with dax.Location.location(url) as name:
+       print 'Remote file', url, 'resolved to local', name
+   #+END_SRC
+
+
 * M@X:
   - Transfer further arguments to gmx 
 	Example

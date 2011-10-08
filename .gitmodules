@@ -10,3 +10,6 @@
 [submodule "gmx"]
 	path = gmx
 	url = git://github.com/badi/gmx
+[submodule "curry"]
+	path = curry
+	url = git@github.com:badi/curry.git

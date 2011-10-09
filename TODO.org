@@ -34,22 +34,26 @@
 
 
 * M@X:
-  - Transfer further arguments to gmx 
-	Example
+** DONE Transfer further arguments to gmx
+	Use the [[https://github.com/badi/curry][curry]] module to partially apply functions that can still be pickled.
+
+	Example:
 
 	#+BEGIN_SRC python
-	import dax, max, rax, gmx
+	import dax, max, rax, gmx, curry
 
 	daxproj = dax.Project()
 	raxproj = rax.Project()
 
-	pdb = 'protein.pdb'
-	ndx = 'system.ndx'
-	mapper  = max.Mapper(gmx.g_rms, kwargs={'s':pdb, 'n':ndx}, )
-	mapper.process(daxproj.get_files('*.xtc'), raxproj)
+	pdb			= 'protein.pdb'
+	ndx			= 'system.ndx'
+	func		= curry.curry(gmx.g_rms, s=pdb, n=ndx)
+	data		= daxproj.get_files('*.xtc', files=True)
+	mapper		= max.Mapper(func)
+	mapper.process(data, raxproj)
 	
 	raxproj.write()
 	#+END_SRC
 
 * GMX
-  - Provide operators that can be called directly from M@X using the kwargs parameter to max.Mapper
+** DONE Provide functions that abstract can be curried with arguements before passing to a M@X Mapper.
